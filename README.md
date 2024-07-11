@@ -1,6 +1,6 @@
 # Quiz_Reversi
 
-![2_7-4logo](images/2_7-4logo.png)
+<img src="/images/2_7-4logo.png" width="75%">
 
 これは、私達「**2⁷-4**(パワー・ツー・セブン・マイナス・フォー)」が制作する、
 クイズ×リバーシの融合を目指すゲームです！！！
