@@ -7,6 +7,12 @@ html, body {
   background-color: #71e2fb;
 }
 
+h1 {
+  font-family: 'Arial', sans-serif; /* ここに使用したいフォントを指定 */
+  font-size: 2em; /* フォントサイズを指定（必要に応じて調整） */
+  color: #000000; /* フォントの色を指定（必要に応じて調整） */
+}
+
 .stage {
   display: flex;
   flex-wrap: wrap;
