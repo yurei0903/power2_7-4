@@ -2,15 +2,32 @@
   box-sizing: border-box;
 }
 
-html, body {
+html {
   margin: 0;
-  background-image: url();
+  background-image: url(/images/Background/background.png);
+  background-size: 300%;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+}
+
+#titleScene {
+  background-image: url(/images/Background/background_white.png);
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+  
 }
 
 h1 {
-  font-family: 'Arial', sans-serif; /* ここに使用したいフォントを指定 */
-  font-size: 2em; /* フォントサイズを指定（必要に応じて調整） */
-  color: #000000; /* フォントの色を指定（必要に応じて調整） */
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 4em;
+  margin-bottom: 10%;
+  line-height: 0px;
+  -webkit-text-stroke: 2px #EB6182;
+  color: #fff; 
 }
 
 .stage {
