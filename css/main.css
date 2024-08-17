@@ -46,26 +46,6 @@ h1 {
   height: 54px;
 }
 
-.blackstone {
-  position: absolute;
-  top: 2px;
-  bottom: 0;
-  left: 2px;
-  width: 42px;
-  height: 42px;
-  border-radius: 21px;
-  background-color: black;
-}
-.whitestone {
-  position: absolute;
-  top: 2px;
-  bottom: 0;
-  left: 2px;
-  width: 42px;
-  height: 42px;
-  border-radius: 21px;
-  background-color: white;
-}
 .stone {
   position: absolute;
   top: 2px;
@@ -74,7 +54,7 @@ h1 {
   width: 42px;
   height: 42px;
   border-radius: 21px;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0); 
 }
 
 #square-template {

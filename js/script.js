@@ -29,13 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
       banmen.push(oneDimArray);
   }
   
-  // 結果の表示（確認用）
+  // 結果の表示（確認用）後で消す
   console.log(banmen);
   banmen[3][4]=0;
   banmen[4][3]=0;
   banmen[3][3]=1;
   banmen[4][4]=1;
-  
+  //確認用後で消す
+  console.log(banmen[3][4]);
+  console.log(banmen[4][3]);
+  console.log(banmen[4][4]);
+  console.log(banmen[3][3]);
   function loadCSV(filePath, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', filePath, true);
@@ -98,26 +102,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const stage = document.getElementById("stage");
   const squareTemplate = document.getElementById("square-template");
 
+  const put_stone= (place,color) =>{
+    let elements = document.getElementsByClassName('stone');
+        let targetElement = elements[place]; 
+        targetElement.style.backgroundColor = color;
+  }
+  const shokibanmen = () =>{
+    put_stone(15,'white');
+    put_stone(14,'black');
+    put_stone(21,'black');
+    put_stone(20,'white');
+  }
   const createSquares = () => {//最初に白い石と黒い石を置く関数
-    let blackorigin=15
-    let whiteorigin=16
-    for(var n=0; n<6; n++){
-    for (let i = 0; i < 6; i++) {
+    for(var n=0; n<36; n++){
       const square = squareTemplate.cloneNode(true); //テンプレートから要素をクローン
       square.removeAttribute("id"); //テンプレート用のid属性を削除
       stage.appendChild(square); //マス目のHTML要素を盤に追加
-      if(banmen[n][i]==0){
-        let elements = document.getElementsByClassName('stone');
-        let targetElement = elements[n*6-(6-i)]; 
-        targetElement.className = 'whitestone'
-      }
-      else if(banmen[n][i]==1){
-        let elements = document.getElementsByClassName('stone');
-        let targetElement = elements[n*6-(6-i)]; 
-        targetElement.className = 'blackstone'
-      }
     }
-  }
+    shokibanmen();
     const parent = document.getElementById('parent');
   };
 
