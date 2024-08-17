@@ -18,38 +18,46 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@900&display=swap" rel="stylesheet">
-      </head>
+    </head>
 
     <body>
       <div id="titleScene">
-        <h1>2⁷-4</h1>
-        <h1>クイズリバーシ</h1>
+        <img src="./images/title.png" style="width: 70%;">
         <span id="startButton">
-          <img src="./images/start_button.png" alt="START" style="width: 20%;">
+          <img src="./images/startButton.png" alt="START" style="width: 50%;">
         </span>
         <span id="settingButton">
-          <img src="./images/setting_button.png" alt="設定" style="width: 20%;">
+          <img src="./images/settingButton.png" alt="設定" style="width: 50%;">
         </span>
       </div>
 
-      <div id="settingScene" style="display: none">
+      <div id="settingScene" style="display: none;">
         <h1>2⁷-4</h1>
         <h1>クイズリバーシ</h1>
         <h2>設定</h2>
         <button id="back_titleSceneButton">タイトルに戻る</button>
+        <button id="back_titleSceneButton1">難易度設定</button>
+        <button id="back_titleSceneButton2">やさしい</button>
+        <button id="back_titleSceneButton3">普通</button>
+        <button id="back_titleSceneButton4">難しい</button>
+        <h3>音量</h3>
+        <h4><input type="range" id="volumebar" min="0" max="100" step="1">
+        <p><span id="volume-value"></span>%</p>
+        </h4>
       </div>
 
-      <div id="gameScene" style="display: none">
+      <div id="gameScene" style="display: none;">
         <!-- 盤 -->
         <div id="stage" class="stage"></div>
+
         <!-- 各マスを描画するためのテンプレート -->
         <div id="square-template" class="square">
-          <div class="stone"></div>
+          <button id="stone"></button>
         </div>
         <div id="questionContainer">
           <button id="questionButton">問題を表示</button>
         </div>
         <script src="js/script.js"></script>
       </div>
-      </body>
+    </body>
 </html>

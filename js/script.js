@@ -1,18 +1,48 @@
 // DOMの読み込みが完了したら実行される関数
 document.addEventListener('DOMContentLoaded', () => {
-  // スタートボタンの要素を取得
   const startButton = document.getElementById('startButton');
-  // 設定ボタンの要素を取得
   const settingButton = document.getElementById('settingButton');
-  // タイトルに戻るボタンの要素を取得
   const back_titleSceneButton = document.getElementById('back_titleSceneButton');
-  // タイトル画面の要素を取得
   const titleScene = document.getElementById('titleScene');
-  // 設定画面の要素を取得
   const settingScene = document.getElementById('settingScene');
-  // ゲームプレイ画面の要素を取得
   const gameScene = document.getElementById('gameScene');
   const questionButton = document.getElementById('questionButton');
+  const volumebar = document.getElementById('volumebar'); 
+  const volumevalue = document.getElementById('volume-value'); 
+
+    // スタートボタンがクリックされたときの処理
+    startButton.addEventListener('click', () => {
+      // タイトル画面を非表示にする
+      titleScene.style.display = 'none';
+      // ゲームプレイ画面を表示する
+      gameScene.style.display = 'block';
+    });
+  
+    // 設定ボタンがクリックされたときの処理
+    settingButton.addEventListener('click', () => {
+      // タイトル画面を非表示にする
+      titleScene.style.display = 'none';
+      // 設定画面を表示する
+      settingScene.style.display = 'block';
+    });
+  
+    // タイトルに戻るボタンがクリックされたときの処理
+    back_titleSceneButton.addEventListener('click', () => {
+      // 設定画面を非表示にする
+      settingScene.style.display = 'none';
+      // タイトル画面を表示する
+      titleScene.style.display = 'block';
+    });
+
+  banmen[3][4]=0;
+  banmen[4][3]=0;
+  banmen[3][3]=1;
+  banmen[4][4]=1;
+  //確認用後で消す
+  console.log(banmen[3][4]);
+  console.log(banmen[4][3]);
+  console.log(banmen[4][4]);
+  console.log(banmen[3][3]);
 
   function loadCSV(filePath, callback) {
     const xhr = new XMLHttpRequest();
@@ -49,41 +79,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // スタートボタンがクリックされたときの処理
-  startButton.addEventListener('click', () => {
-    // タイトル画面を非表示にする
-    titleScene.style.display = 'none';
-    // ゲームプレイ画面を表示する
-    gameScene.style.display = 'block';
-  });
-
-  // 設定ボタンがクリックされたときの処理
-  settingButton.addEventListener('click', () => {
-    // タイトル画面を非表示にする
-    titleScene.style.display = 'none';
-    // 設定画面を表示する
-    settingScene.style.display = 'block';
-  });
-
-  // タイトルに戻るボタンがクリックされたときの処理
-  back_titleSceneButton.addEventListener('click', () => {
-    // 設定画面を非表示にする
-    settingScene.style.display = 'none';
-    // タイトル画面を表示する
-    titleScene.style.display = 'block';
-  });
-
   const stage = document.getElementById("stage");
   const squareTemplate = document.getElementById("square-template");
 
-  const createSquares = () => {
-    for (let i = 0; i < 36; i++) {
+  const shokibanmen = () =>{
+    put_stone(15,'white');
+    put_stone(14,'black');
+    put_stone(21,'black');
+    put_stone(20,'white');
+  };
+
+  const createSquares = () => {//最初に白い石と黒い石を置く関数
+    for(var n=0; n<36; n++){
       const square = squareTemplate.cloneNode(true); //テンプレートから要素をクローン
       square.removeAttribute("id"); //テンプレート用のid属性を削除
       stage.appendChild(square); //マス目のHTML要素を盤に追加
     }
+    shokibanmen();
+    const parent = document.getElementById('parent');
   };
 
+  
   // マス目を作成
   createSquares();
 
@@ -93,3 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCSV('csv/quiz_20240718.csv', displayQuestion);
   });
 });
+
+//音量バーの調整の処理
+const setvolume = (val) => {
+  volumevalue.innerText = val;
+}
+const rangeOnChange = (e) =>{
+  setvolume(e.target.value);
+}
+window.onload = () => {
+  volumebar.addEventListener('input', rangeOnChange); 
+}

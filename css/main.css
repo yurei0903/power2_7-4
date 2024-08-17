@@ -13,9 +13,10 @@ html {
 
 #titleScene {
   background-image: url(/images/Background/background_white.png);
-  background-size: 75%;
+  background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
+  padding: 15%;
   
 }
 
