@@ -4,7 +4,7 @@
 
 html {
   margin: 0;
-  background-image: url(/images/Background/background.png);
+  background-image: url(../images/Background/background.png);
   background-size: 300%;
   background-repeat: no-repeat;
   background-position: center;
@@ -12,7 +12,7 @@ html {
 }
 
 #titleScene {
-  background-image: url(/images/Background/background_white.png);
+  background-image: url(../images/Background/background_white.png);
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
