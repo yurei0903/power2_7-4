@@ -11,6 +11,10 @@ html {
   text-align: center;
 }
 
+img {
+  -webkit-user-drag: none;
+}
+
 #titleScene {
   background-image: url(../images/Background/background_white.png);
   background-size: 70%;
