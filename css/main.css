@@ -25,9 +25,20 @@ h1 {
   font-weight: 900;
   font-style: normal;
   font-size: 4em;
-  margin-bottom: 10%;
+  margin: 20%, -50%;
   line-height: 0px;
   -webkit-text-stroke: 2px #EB6182;
+  color: #fff; 
+}
+
+.notfound {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 0.9em;
+  margin-bottom: 5%;
+  line-height: 0px;
+  -webkit-text-stroke: 0.5px #EB6182;
   color: #fff; 
 }
 

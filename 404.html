@@ -2,7 +2,7 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8" />
-        <title>Quiz×Reversi | 2⁷-4</title>
+        <title>ページが見つかりません | 2⁷-4</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
         <meta property="og:type" content="website">
@@ -22,41 +22,12 @@
 
     <body>
       <div id="titleScene">
-        <img src="./images/title.png" style="width: 70%;">
-        <span id="startButton">
-          <img src="./images/startButton.png" alt="START" style="width: 50%;">
+        <h1>404</h1>
+        <p class="notfound">ページが見つかりませんでした</p>
+        <p class="notfound">not found</p>
+        <span onclick="location.href='index.html'">
+          <img src="./images/titleButton.png" alt="タイトルへ" style="width: 50%;">
         </span>
-        <span id="settingButton">
-          <img src="./images/settingButton.png" alt="設定" style="width: 50%;">
-        </span>
-      </div>
-
-      <div id="settingScene" style="display: none;">
-        <h1>2⁷-4</h1>
-        <h1>クイズリバーシ</h1>
-        <h2>設定</h2>
-        <button id="back_titleSceneButton">タイトルに戻る</button>
-        <button id="back_titleSceneButton1">難易度設定</button>
-        <button id="back_titleSceneButton2">やさしい</button>
-        <button id="back_titleSceneButton3">普通</button>
-        <button id="back_titleSceneButton4">難しい</button>
-        <h3>音量</h3>
-        <h4><input type="range" id="volumebar" min="0" max="100" step="1">
-        <p><span id="volume-value"></span>%</p>
-        </h4>
-      </div>
-
-      <div id="gameScene" style="display: none;">
-        <!-- 盤 -->
-        <div id="stage" class="stage"></div>
-
-        <!-- 各マスを描画するためのテンプレート -->
-        <div id="square-template" class="square">
-          <button id="stone"></button>
-        </div>
-        <div id="questionContainer">
-          <button id="questionButton">問題を表示</button>
-        </div>
         <script src="js/script.js"></script>
       </div>
     </body>
