@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingScene = document.getElementById('settingScene');
   const gameScene = document.getElementById('gameScene');
   const questionButton = document.getElementById('questionButton');
-  const volumebar = document.getElementById('volumebar'); 
-  const volumevalue = document.getElementById('volume-value'); 
 
     // スタートボタンがクリックされたときの処理
     startButton.addEventListener('click', () => {
@@ -88,12 +86,43 @@ document.addEventListener('DOMContentLoaded', () => {
     put_stone(21,'black');
     put_stone(20,'white');
   };
+  const stone_judgement=(ind)=>{
+    for(let i=6;i<5;i--){
+      if(ind%i==0){
+        alert("ここにはおけません");
+      }
+    }
+  }
+  const onClickSquare = (index) => {
+    if(stoneStateList[index]!==0){
+      alert("ここにはおけません");
+    }
+    stone_judgement(stoneStateList[index])
+  }
 
   const createSquares = () => {//最初に白い石と黒い石を置く関数
     for(var n=0; n<36; n++){
       const square = squareTemplate.cloneNode(true); //テンプレートから要素をクローン
       square.removeAttribute("id"); //テンプレート用のid属性を削除
       stage.appendChild(square); //マス目のHTML要素を盤に追加
+      const stone = square.querySelector('.stone');
+      let defaultState;
+    //iの値によってデフォルトの石の状態を分岐する
+    if (i == 15 || i == 20) {
+      defaultState = 1;
+    } else if (i == 14 || i == 21) {
+      defaultState = 2;
+    } else {
+      defaultState = 0;
+    }
+
+    stone.setAttribute("data-state", defaultState);
+    //ここから追加
+    stone.setAttribute("data-index", i); //インデックス番号をHTML要素に保持させる
+    stoneStateList.push(defaultState); //初期値を配列に格納
+      square.addEventListener('click', () => {
+        onClickSquare(i);
+      })
     }
     shokibanmen();
     const parent = document.getElementById('parent');
@@ -111,6 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //音量バーの調整の処理
+
+const bgmSwitch = document.querySelector(".bgmSwitch");
+const bgmSwitch_toggle = document.querySelector(".bgmSwitch_toggle");
+
+bgmSwitch.addEventListener("click", () => {
+  bgmSwitch.classList.toggle("active");
+  bgmSwitch_toggle.classList.toggle("active");
+});
+
+const volumebar = document.getElementById('volumebar'); 
+const volumevalue = document.getElementById('volume-value'); 
+
 const setvolume = (val) => {
   volumevalue.innerText = val;
 }

@@ -46,6 +46,47 @@ h1 {
   color: #fff; 
 }
 
+#settingScene {
+  background-color: #fff;
+  width: 75%;
+  background-repeat: no-repeat;
+  margin: 10px auto;
+  background-position: center;
+  padding: 15%;
+  
+}
+
+.bgmSwitch {
+  width: 4em;
+  height: 2em;
+  background-color: lightgray;
+  margin: auto;
+  position: relative;
+  cursor: pointer;
+  transition: background-color .2s ease-in-out;
+}
+
+.bgmSwitch.active {
+  background-color: #f5d24b;
+}
+
+.bgmSwitch_toggle {
+  width: 1.8em;
+  height: 1.8em;
+  position: absolute;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 0.1em;
+  margin: auto;
+  box-shadow: 0.1em 0.1em 0.2em #b7b7b7, -0.1em -0.1em -0.2em #cecece;
+  transition: left .3s ease-in-out;
+}
+
+.bgmSwitch_toggle.active {
+  left: 2.1em;
+}
+
 .stage {
   display: flex;
   flex-wrap: wrap;

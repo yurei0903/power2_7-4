@@ -21,7 +21,7 @@
     </head>
 
     <body>
-      <div id="titleScene">
+      <div id="titleScene" style="display: none;">
         <img src="./images/title.png" style="width: 70%;">
         <span id="startButton">
           <img src="./images/startButton.png" alt="START" style="width: 50%;">
@@ -31,9 +31,8 @@
         </span>
       </div>
 
-      <div id="settingScene" style="display: none;">
-        <h1>2⁷-4</h1>
-        <h1>クイズリバーシ</h1>
+      <div id="settingScene" style="display: block;">
+        <img src="./images/title.png" style="width: 70%;">
         <h2>設定</h2>
         <button id="back_titleSceneButton">タイトルに戻る</button>
         <button id="back_titleSceneButton1">難易度設定</button>
@@ -41,12 +40,17 @@
         <button id="back_titleSceneButton3">普通</button>
         <button id="back_titleSceneButton4">難しい</button>
         <h3>音量</h3>
+        <div class="bgmSwitch">
+          <div class="bgmSwitch_toggle"></div>
+        </div>
         <h4><input type="range" id="volumebar" min="0" max="100" step="1">
         <p><span id="volume-value"></span>%</p>
         </h4>
       </div>
 
       <div id="gameScene" style="display: none;">
+        <audio src="./music/komizuwomitsumete.mp3" id="BGM" loop></audio>
+
         <!-- 盤 -->
         <div id="stage" class="stage"></div>
 
