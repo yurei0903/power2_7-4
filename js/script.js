@@ -14,32 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameScene = document.getElementById('gameScene');
   const questionButton = document.getElementById('questionButton');
   
-  const rows = 6;  // 行の数
-  const cols = 6;  // 列の数
-  
-  // 二重配列の宣言と初期化
-  let banmen = [];
-  
-  // 二重ループで配列を初期化
-  for (let i = 0; i < rows; i++) {
-      let oneDimArray = [];
-      for (let j = 0; j < cols; j++) {
-          oneDimArray.push(2); // 値2を追加
-      }
-      banmen.push(oneDimArray);
-  }
-  
-  // 結果の表示（確認用）後で消す
-  console.log(banmen);
-  banmen[3][4]=0;
-  banmen[4][3]=0;
-  banmen[3][3]=1;
-  banmen[4][4]=1;
-  //確認用後で消す
-  console.log(banmen[3][4]);
-  console.log(banmen[4][3]);
-  console.log(banmen[4][4]);
-  console.log(banmen[3][3]);
+  const stoneStateList = [];
+
+  var banmen
   function loadCSV(filePath, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', filePath, true);
@@ -113,15 +90,49 @@ document.addEventListener('DOMContentLoaded', () => {
     put_stone(21,'black');
     put_stone(20,'white');
   }
+  const stone_judgement=(ind)=>{
+    for(let i=6;i<5;i--){
+      if(ind%i==0){
+        alert("ここにはおけません");
+      }
+    }
+  }
+  const onClickSquare = (index) => {
+    if(stoneStateList[index]!==0){
+      alert("ここにはおけません");
+      
+    }
+    stone_judgement(stoneStateList[index])
+  }
   const createSquares = () => {//最初に白い石と黒い石を置く関数
-    for(var n=0; n<36; n++){
+    for(let i=0; i<36; i++){
       const square = squareTemplate.cloneNode(true); //テンプレートから要素をクローン
       square.removeAttribute("id"); //テンプレート用のid属性を削除
+
       stage.appendChild(square); //マス目のHTML要素を盤に追加
+      const stone = square.querySelector('.stone');
+      let defaultState;
+    //iの値によってデフォルトの石の状態を分岐する
+    if (i == 15 || i == 20) {
+      defaultState = 1;
+    } else if (i == 14 || i == 21) {
+      defaultState = 2;
+    } else {
+      defaultState = 0;
+    }
+
+    stone.setAttribute("data-state", defaultState);
+    //ここから追加
+    stone.setAttribute("data-index", i); //インデックス番号をHTML要素に保持させる
+    stoneStateList.push(defaultState); //初期値を配列に格納
+      square.addEventListener('click', () => {
+        onClickSquare(i);
+      })
     }
     shokibanmen();
     const parent = document.getElementById('parent');
   };
+
 
   // マス目を作成
   createSquares();
