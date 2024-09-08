@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameScene.style.display = 'block';
     });
   
-    // 設定ボタンがクリックされたときの処理
+    // 設定ボタンがクリックされたときの処理!!!!!!!!
     settingButton.addEventListener('click', () => {
       // タイトル画面を非表示にする
       titleScene.style.display = 'none';
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       settingScene.style.display = 'block';
     });
   
-    // タイトルに戻るボタンがクリックされたときの処理
+    // タイトルに戻るボタンがクリックされたときの処理!!!!!!
     back_titleSceneButton.addEventListener('click', () => {
       // 設定画面を非表示にする
       settingScene.style.display = 'none';
