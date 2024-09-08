@@ -21,10 +21,11 @@
     </head>
 
     <body>
+      <audio id="btn_audio">
+        <source src="./music/SE/click.mp3" type="audio/mp3">
+      </audio>
+
       <div id="titleScene" style="display: block;">
-        <audio id="btn_audio">
-          <source src="./music/SE/click.mp3" type="audio/mp3">
-        </audio>
         <img src="./images/title.png" style="width: 70%;">
         <span id="startButton">
           <img src="./images/startButton.png" alt="START" style="width: 50%;">
@@ -46,13 +47,15 @@
         <div class="bgmSwitch">
           <div class="bgmSwitch_toggle"></div>
         </div>
-        <h4><input type="range" id="volumebar" min="0" max="100" step="1">
+        <h4>BGM・SE<input type="range" id="volumebar" min="0" max="100" step="1">
         <p><span id="volume-value"></span>%</p>
         </h4>
       </div>
 
       <div id="gameScene" style="display: none;">
-        <audio src="./music/komizuwomitsumete.mp3" id="BGM" loop autoplay></audio>
+        <audio id="BGM" loop>
+          <source src="./music/komizuwomitsumete.mp3" type="audio/mp3">
+        </audio>
 
         <!-- 盤 -->
         <div id="stage" class="stage"></div>

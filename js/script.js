@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById('btn_audio').currentTime = 0; //連続クリックに対応
       document.getElementById('btn_audio').play(); //クリックしたら音を再生
+
+      document.getElementById('BGM').currentTime = 0; //連続クリックに対応
+      document.getElementById('BGM').play(); //クリックしたら音を再生
     });
   
     // 設定ボタンがクリックされたときの処理!!!!!!!!
@@ -25,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
       titleScene.style.display = 'none';
       // 設定画面を表示する
       settingScene.style.display = 'block';
+
+      document.getElementById('btn_audio').currentTime = 0; //連続クリックに対応
+      document.getElementById('btn_audio').play(); //クリックしたら音を再生
     });
   
     // タイトルに戻るボタンがクリックされたときの処理!!!!!!
@@ -33,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
       settingScene.style.display = 'none';
       // タイトル画面を表示する
       titleScene.style.display = 'block';
+
+      document.getElementById('btn_audio').currentTime = 0; //連続クリックに対応
+      document.getElementById('btn_audio').play(); //クリックしたら音を再生
     });
 
   banmen[3][4]=0;
