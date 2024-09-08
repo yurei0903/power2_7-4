@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
       titleScene.style.display = 'none';
       // ゲームプレイ画面を表示する
       gameScene.style.display = 'block';
+
+      document.getElementById('btn_audio').currentTime = 0; //連続クリックに対応
+      document.getElementById('btn_audio').play(); //クリックしたら音を再生
     });
   
     // 設定ボタンがクリックされたときの処理!!!!!!!!

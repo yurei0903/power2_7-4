@@ -4,6 +4,8 @@
 
 html {
   margin: 0;
+  height: 100%;
+  padding: 0;
   background-image: url(../images/Background/background.png);
   background-size: 300%;
   background-repeat: no-repeat;
@@ -20,7 +22,7 @@ img {
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 15%;
+  padding: 5%;
   
 }
 
@@ -90,9 +92,9 @@ h1 {
 .stage {
   display: flex;
   flex-wrap: wrap;
-  margin: 60px;
-  width: 344px;
-  height: 384px;
+  margin: 20px auto;
+  width: auto;
+  height: auto;
 }
 
 .square {
