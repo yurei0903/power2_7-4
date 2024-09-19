@@ -78,77 +78,124 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const stage = document.getElementById("stage");
   const squareTemplate = document.getElementById("square-template");
-  const put_stone= (place,colorn) =>{
-    let color=['tomei','white','black']
-    let elements = document.getElementsByClassName('stone');
-        let targetElement = elements[place]; 
-        targetElement.style.backgroundColor = color[colorn];
-        stoneStateList[place]=colorn
-  }
-  const shokibanmen = () =>{
-    put_stone(15,1);
-    put_stone(14,2);
-    put_stone(21,2);
-    put_stone(20,1);
-  };
-  const beside=(where,flag,ind,muki)=>{//石が置けるかどうか判断する関数
-    let mawari=ind-muki*flag;
-    if(mawari>=0&&mawari<=35){
-      console.log(mawari);
-      console.log(ind);
-    if(stoneStateList[mawari] !==0 &&stonecolor!==stoneStateList[mawari]){ 
-      console.log("ok")
-      for(i=0;where[0]-i*flag*muki>0;i++){
-        console.log(where[0])
-        console.log(i*flag*muki)
-          if(stoneStateList[ind-i*flag*muki]==stonecolor){
-          for(let n=0;n<i;n++){
-            put_stone(ind-n*flag*muki,stonecolor);
-          }
-          }
+  
+//getReversibleStones関数のすぐ上に書きましょう
+
+const currentTurnText = document.getElementById("current-turn");
+const passButton = document.getElementById("pass");
+//onClickSquare関数のすぐ上に記述しましょう
+let currentColor = 1;
+const getReversibleStones = (idx) => {
+  //クリックしたマスから見て、各方向にマスがいくつあるかをあらかじめ計算する
+  //squareNumsの定義はやや複雑なので、理解せずコピーアンドペーストでも構いません
+  const squareNums = [
+    5 - (idx % 6),
+    Math.min(5 - (idx % 6), (30 + (idx % 6) - idx) / 6),
+    (30 + (idx % 6) - idx) / 6,
+    Math.min(idx % 6, (30 + (idx % 6) - idx) / 6),
+    idx % 6,
+    Math.min(idx % 6, (idx - (idx % 6)) / 6),
+    (idx - (idx % 6)) / 6,
+    Math.min(5 - (idx % 6), (idx - (idx % 6)) / 6),
+  ];
+  
+  const parameters = [1, 7, 6, 5, -1, -7, -6, -5];
+
+  //ここから下のロジックはやや入念に読み込みましょう
+  //ひっくり返せることが確定した石の情報を入れる配列
+  let results = [];
+
+  //8方向への走査のためのfor文
+  for (let i = 0; i < 8; i++) {
+    //ひっくり返せる可能性のある石の情報を入れる配列
+    const box = [];
+    //現在調べている方向にいくつマスがあるか
+    const squareNum = squareNums[i];
+    const param = parameters[i];
+    //ひとつ隣の石の状態
+    const nextStoneState = stoneStateList[idx + param];
+
+    //フロー図の[2][3]：隣に石があるか 及び 隣の石が相手の色か -> どちらでもない場合は次のループへ
+    if (nextStoneState === 0 || nextStoneState === currentColor) continue;
+    //隣の石の番号を仮ボックスに格納
+    box.push(idx + param);
+
+    //フロー図[4][5]のループを実装
+    for (let j = 0; j < squareNum - 1; j++) {
+      const targetIdx = idx + param * 2 + param * j;
+      const targetColor = stoneStateList[targetIdx];
+      //フロー図の[4]：さらに隣に石があるか -> なければ次のループへ
+      if (targetColor === 0) continue;
+      //フロー図の[5]：さらに隣にある石が相手の色か
+      if (targetColor === currentColor) {
+        //自分の色なら仮ボックスの石がひっくり返せることが確定
+        results = results.concat(box);
+        break;
+      } else {
+        //相手の色なら仮ボックスにその石の番号を格納
+        box.push(targetIdx);
       }
     }
+  }
+  //ひっくり返せると確定した石の番号を戻り値にする
+  return results;
+};
+  //関数の中身を以下のように編集しましょう
+const onClickSquare = (index) => {
+  //ひっくり返せる石の数を取得
+  const reversibleStones = getReversibleStones(index);
+
+  //他の石があるか、置いたときにひっくり返せる石がない場合は置けないメッセージを出す
+  if (stoneStateList[index] !== 0 || !reversibleStones.length) {
+    alert("ここには置けないよ！");
+    return;
+  }
+
+  //自分の石を置く 
+  stoneStateList[index] = currentColor;
+  document
+    .querySelector(`[data-index='${index}']`)
+    .setAttribute("data-state", currentColor);
+
+  //相手の石をひっくり返す = stoneStateListおよびHTML要素の状態を現在のターンの色に変更する
+  reversibleStones.forEach((key) => {
+    stoneStateList[key] = currentColor;
+    document.querySelector(`[data-index='${key}']`).setAttribute("data-state", currentColor);
+  });
+
+  //もし盤面がいっぱいだったら、集計してゲームを終了する
+  if (stoneStateList.every((state) => state !== 0)) {
+    const blackStonesNum = stoneStateList.filter(state => state === 1).length;
+    const whiteStonesNum = 36 - whiteStonesNum;
+
+    let winnerText = "";
+    if (blackStonesNum > whiteStonesNum) {
+      winnerText = "黒の勝ちです！";
+    } else if (blackStonesNum < whiteStonesNum) {
+      winnerText = "白の勝ちです！";
+    } else {
+      winnerText = "引き分けです";
+    }
+
+    alert(`ゲーム終了です。白${whiteStonesNum}、黒${blackStonesNum}で、${winnerText}`)
+  }
+
+  //ゲーム続行なら相手のターンにする
+  currentColor = 3 - currentColor;
+
+  if (currentColor === 1) {
+    currentTurnText.textContent = "黒";
+  } else {
+    currentTurnText.textContent = "白";
   }
 }
-  const stone_judgement=(ind)=>{
-    //console.log(stonecolor);
-    let stonestart=stoneStateList[ind];
-    console.log(stoneStateList[ind]);
-    const stone_where=[ind%6,5-ind%6];
-    let tate=6
-    let yoko=1
-    for(let i=1;i>-2;i=i-2){
-      beside(stone_where,i,ind,tate);
-      beside(stone_where,i,ind,yoko);
-    }
-    //console.log(stoneStateList[ind]);
-    //console.log(stonestart);
-    if(stonestart!==stoneStateList[ind]){
-      if(stonecolor==1){
-        stonecolor=2;
-        console.log("black");
-      }
-      else{
-        stonecolor=1;
-        console.log("white");
-      }
-      //console.log(stonecolor);
-    }
-    };
-  const onClickSquare = (index) => {//石がクリックされたときに動く関数
-    if(stoneStateList[index]!==0){
-      alert("ここにはおけません");
-    }
-    stone_judgement(index)
-  }
   const createSquares = () => {//最初に白い石と黒い石を置く関数
     for(let i=0; i<36; i++){
-      const square = squareTemplate.cloneNode(true); //テンプレートから要素をクローン
-      square.removeAttribute("id"); //テンプレート用のid属性を削除
+      const square = squareTemplate.cloneNode(true);
+    square.removeAttribute("id");
+    stage.appendChild(square);
 
-      stage.appendChild(square); //マス目のHTML要素を盤に追加
-      const stone = square.querySelector('.stone');
-      let defaultState;
+    const stone = square.querySelector('.stone');
     //iの値によってデフォルトの石の状態を分岐する
     if (i == 15 || i == 20) {
       defaultState = 1;
@@ -166,13 +213,24 @@ document.addEventListener('DOMContentLoaded', () => {
         onClickSquare(i);
       })
     }
-    shokibanmen();
-    const parent = document.getElementById('parent');
+    stone.setAttribute("data-state", defaultState);
+
   };
 
 
-  // マス目を作成
-  createSquares();
+  window.onload = () => {
+    createSquares();
+  
+    passButton.addEventListener("click", () => {
+      currentColor = 3 - currentColor;
+    
+      if (currentColor === 1) {
+        currentTurnText.textContent = "黒";
+      } else {
+        currentTurnText.textContent = "白"
+      }
+    })
+  }
 
   // 設定ボタンがクリックされたときの処理
   questionButton.addEventListener('click', () => {
