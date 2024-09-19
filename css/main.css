@@ -17,8 +17,8 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   margin: 60px;
-  width: 344px;
-  height: 384px;
+  width: 320px;
+  height: 300px;
 }
 
 .square {
@@ -45,7 +45,6 @@ h1 {
   width: 54px;
   height: 54px;
 }
-
 .stone {
   position: absolute;
   top: 2px;
@@ -54,7 +53,18 @@ h1 {
   width: 42px;
   height: 42px;
   border-radius: 21px;
-  background-color: rgba(255, 255, 255, 0); 
+}
+
+.stone[data-state="0"] {
+  display: none;
+}
+
+.stone[data-state="1"] {
+  background-color: black;
+}
+
+.stone[data-state="2"] {
+  background-color: white;
 }
 
 #square-template {
