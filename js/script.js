@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const questionButton = document.getElementById('questionButton');
   
   const stoneStateList = [];
-
-  var banmen
+  var stonecolor=1;
+  var banmen;
   function loadCSV(filePath, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', filePath, true);
@@ -78,31 +78,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const stage = document.getElementById("stage");
   const squareTemplate = document.getElementById("square-template");
-
-  const put_stone= (place,color) =>{
+  const put_stone= (place,colorn) =>{
+    let color=['tomei','white','black']
     let elements = document.getElementsByClassName('stone');
         let targetElement = elements[place]; 
-        targetElement.style.backgroundColor = color;
+        targetElement.style.backgroundColor = color[colorn];
+        stoneStateList[place]=colorn
   }
   const shokibanmen = () =>{
-    put_stone(15,'white');
-    put_stone(14,'black');
-    put_stone(21,'black');
-    put_stone(20,'white');
-  }
-  const stone_judgement=(ind)=>{
-    for(let i=6;i<5;i--){
-      if(ind%i==0){
-        alert("ここにはおけません");
+    put_stone(15,1);
+    put_stone(14,2);
+    put_stone(21,2);
+    put_stone(20,1);
+  };
+  const beside=(where,flag,ind,muki)=>{//石が置けるかどうか判断する関数
+    let mawari=ind-muki*flag;
+    if(mawari>=0&&mawari<=35){
+      console.log(mawari);
+      console.log(ind);
+    if(stoneStateList[mawari] !==0 &&stonecolor!==stoneStateList[mawari]){ 
+      console.log("ok")
+      for(i=0;where[0]-i*flag*muki>0;i++){
+        console.log(where[0])
+        console.log(i*flag*muki)
+          if(stoneStateList[ind-i*flag*muki]==stonecolor){
+          for(let n=0;n<i;n++){
+            put_stone(ind-n*flag*muki,stonecolor);
+          }
+          }
       }
     }
   }
-  const onClickSquare = (index) => {
+}
+  const stone_judgement=(ind)=>{
+    //console.log(stonecolor);
+    let stonestart=stoneStateList[ind];
+    console.log(stoneStateList[ind]);
+    const stone_where=[ind%6,5-ind%6];
+    let tate=6
+    let yoko=1
+    for(let i=1;i>-2;i=i-2){
+      beside(stone_where,i,ind,tate);
+      beside(stone_where,i,ind,yoko);
+    }
+    //console.log(stoneStateList[ind]);
+    //console.log(stonestart);
+    if(stonestart!==stoneStateList[ind]){
+      if(stonecolor==1){
+        stonecolor=2;
+        console.log("black");
+      }
+      else{
+        stonecolor=1;
+        console.log("white");
+      }
+      //console.log(stonecolor);
+    }
+    };
+  const onClickSquare = (index) => {//石がクリックされたときに動く関数
     if(stoneStateList[index]!==0){
       alert("ここにはおけません");
-      
     }
-    stone_judgement(stoneStateList[index])
+    stone_judgement(index)
   }
   const createSquares = () => {//最初に白い石と黒い石を置く関数
     for(let i=0; i<36; i++){
