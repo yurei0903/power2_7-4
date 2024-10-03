@@ -28,5 +28,8 @@ class RevData {
         this.putToken = {x: 0, y: 0};//ログ:石置き場所
         this.activeSquares = [];     //配置可能マス配列
         this.revTokens = []           //ログ:裏返した石の配列
+funvtionName();
+objectName();
+
     }
 }

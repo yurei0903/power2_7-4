@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問題表示アプリ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #question {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #answer {
+            margin-top: 10px;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>問題表示アプリ</h1>
+    <button class="button" onclick="showQuestion()">問題を表示</button>
+
+    <div id="question"></div>
+    <div id="answer"></div>
+
+    <script>
+        // CSVデータを配列に変換
+        const questions = [
+            ["択一(文章)", "世界三大珍味は「キャビア」「トリュフ」ともう１つはなんでしょうか？ １．アンチョビ　２．フォアグラ　３．マツタケ", "２．フォアグラ", "中級（小学生高学年 or 中学生レベル？)", "最勝寺"],
+            ["択一(文章)", "面積が日本一大きい都道府県は北海道ですが、面積が一番小さい都道府県はどこでしょうか？ １．東京都　２．沖縄県　３．香川県", "３．香川県", "中級", "最勝寺"],
+            //... ここに他の問題データを追加 ...
+        ];
+
+        function showQuestion() {
+            // ランダムな問題を取得
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            const questionData = questions[randomIndex];
+
+            // 表示内容の更新
+            document.getElementById("question").innerText = questionData[1]; // 問題文
+            document.getElementById("answer").innerText = "答え: " + questionData[2]; // 正しい答え
+        }
+    </script>
+</body>
+</html>

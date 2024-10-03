@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .csvlist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        
+        article {
+            border: 1px solid #ccc;
+            padding: 15px; /* パディングを調整 */
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            flex: 1 1 calc(33% - 10px); /* 3列に配置するために調整 */
+            box-sizing: border-box; /* パディングを含むボックスサイズの設定 */
+        }
+
+        /* 太字用のクラス */
+        .bold {
+            font-weight: bold;
+        }
+
+        /* スペース削減のための調整 */
+        h4, p {
+            margin: 5px 0; /* マージンを調整 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <div class="csvlist" id="js-csv"></div>
+
+    <script>
+        async function loadCSVData() {
+            const response = await fetch('./csv/.quiz_20240718.csv');
+            const text = await response.text();
+            const data = text.trim().split('\n')
+                .map(line => line.split(',').map(x => x.trim()));
+
+            // ヘッダーを無視してデータ行を取得
+            const articles = data.slice(1)
+                .map(x => `
+                    <article>
+                        <p>${x[0]}</p>  <!-- 問題形式は細字 -->
+                        <h4 class="bold">${x[1]}</h4> <!-- 問題文は太字 -->
+                        <p>答え: <span class="bold">${x[2]}</span></p> <!-- 答えは太字 -->
+                        <p>備考(難易度): ${x[3]}</p> <!-- 備考を追加 -->
+                        <p>作成者: ${x[4]}</p> <!-- 作成者を追加 -->
+                    </article>
+                `)
+                .join('');
+            document.getElementById('js-csv').innerHTML = articles;
+        }
+
+        loadCSVData();
+        
+    </script>
+</body>
+</html>
+</html>
