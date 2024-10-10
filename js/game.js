@@ -33,3 +33,11 @@ objectName();
 
     }
 }
+
+let canvas = document.createElement('canvas');
+canvas.width = 1200;
+canvas.height = 800;
+let context = canvas.getContext('2d');
+
+console.log(canvas);
+console.log(context);
