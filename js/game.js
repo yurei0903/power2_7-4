@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     let revData = new RevData();
     console.log(revData.scores);
+
+    let cobj = gameCanvas.addBgCanvas('#target', 1200, 800);
+
+    let image = new Image();
+    image.onload = function(){
+        cobj.context.drawImage(image, 0, 0);
+    };
+    image.src = 'images/akakoma.png';
 });
 // リバーシ データ
 class RevData {
@@ -28,16 +36,8 @@ class RevData {
         this.putToken = {x: 0, y: 0};//ログ:石置き場所
         this.activeSquares = [];     //配置可能マス配列
         this.revTokens = []           //ログ:裏返した石の配列
-funvtionName();
-objectName();
 
+        
     }
 }
 
-let canvas = document.createElement('canvas');
-canvas.width = 1200;
-canvas.height = 800;
-let context = canvas.getContext('2d');
-
-console.log(canvas);
-console.log(context);
