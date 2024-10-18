@@ -11,8 +11,8 @@ appResource.load = async function() {
     resAudio.load('DRAW', 'audio/lose.mp3');
 
     const r = [];
-    r.push(resImage.load('token0', 'image/token0.png'));
-    r.push(resImage.load('token1', 'image/token1.png'));
+    r.push(resImage.load('token0', 'image/akakoma.png'));
+    r.push(resImage.load('token1', 'image/sirokoma.png'));
     r.push(resImage.load('square', 'image/square.png'));
     r.push(resImage.load('active', 'image/active.png'));
     r.push(resFont.load('main', 'ArchivoBlack'));

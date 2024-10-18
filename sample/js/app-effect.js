@@ -34,20 +34,5 @@ appEffect.updateBoard = async function() {
         const {context} = appView.cobj;
         context.lineWidth = unit * 0.15;
         context.strokeStyle = '#9fffff';
-
-        // 置いた石の演出
-        const {putToken} = revCore.data;
-        const {x, y} = appLayout.boardToPixel(putToken.x, putToken.y);
-        context.strokeRect(x, y, unit, unit);
-
-        // 裏返り石の演出
-        revCore.data.revTokens.forEach(token => {
-            const {x, y} = appLayout.boardToPixel(token.x, token.y);
-            context.save();
-            context.translate(x + unit / 2, y + unit / 2);
-            context.rotate(rate * 10);
-            context.strokeRect(- unit / 2, -unit / 2, unit, unit);
-            context.restore();
-        });
     });
 };
