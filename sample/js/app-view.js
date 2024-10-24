@@ -54,7 +54,7 @@ appView.drawScoreImage = function() {
 appView.drawScoreText = function() {
     appLayout.scoreTexts.forEach((obj, i) => {
         // 文字の描画
-        const name = ['You', 'Com'][i];
+        const name = ['1P ', '2P '][i];
         const score = revCore.data.scores[i];
         const scoreText = `${score}`.padStart(2, '0');
         const text = `${name}${scoreText}`;
