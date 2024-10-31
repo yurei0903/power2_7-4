@@ -7,20 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingScene = document.getElementById('settingScene');
   const gameScene = document.getElementById('gameScene');
   const questionButton = document.getElementById('questionButton');
-
-    // スタートボタンがクリックされたときの処理
-    startButton.addEventListener('click', () => {
-      // タイトル画面を非表示にする
-      titleScene.style.display = 'none';
-      // ゲームプレイ画面を表示する
-      gameScene.style.display = 'block';
-
-      document.getElementById('btn_audio').currentTime = 0; //連続クリックに対応
-      document.getElementById('btn_audio').play(); //クリックしたら音を再生
-
-      document.getElementById('BGM').currentTime = 0; //連続クリックに対応
-      document.getElementById('BGM').play(); //クリックしたら音を再生
-    });
   
     // 設定ボタンがクリックされたときの処理!!!!!!!!
     settingButton.addEventListener('click', () => {

@@ -39,7 +39,9 @@
       
 
         <span id="startButton">
+          <a class href="./game.html">
           <img src="./images/startButton.png" alt="START" style="width: 50%;">
+          </a>
         </span>
         <span id="settingButton">
           <img src="./images/settingButton.png" alt="設定" style="width: 50%;">
@@ -58,13 +60,10 @@
         <div class="bgmSwitch">
           <div class="bgmSwitch_toggle"></div>
         </div>
+        
         <h4>BGM・SE<input type="range" id="volumebar" min="0" max="100" step="1">
         <p><span id="volume-value"></span>%</p>
         </h4>
-        <h4>コーディング専用</h4>
-        <a href="game.html">game.html</a>
-        <a href="quiz.html">quiz.html</a>
-        <a href="csv.html">csv.html</a>
       </div>
 
       <div id="gameScene" style="display: none;">
@@ -77,9 +76,6 @@
         <div id="stage" class="stage"></div>
 
         <!-- 各マスを描画するためのテンプレート -->
-        <div id="square-template" class="square">
-          <button id="stone"></button>
-        </div>
         <div id="questionContainer">
           <button id="questionButton">問題を表示</button>
         </div>
