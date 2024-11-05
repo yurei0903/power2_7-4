@@ -94,9 +94,15 @@ h1 {
 .stage {
   display: flex;
   flex-wrap: wrap;
+<<<<<<< HEAD
   margin: 20px auto;
   width: auto;
   height: auto;
+=======
+  margin: 60px;
+  width: 320px;
+  height: 300px;
+>>>>>>> 1f69d76342d60cee59db7f5228e71fbda3031980
 }
 
 .square {
@@ -123,7 +129,6 @@ h1 {
   width: 54px;
   height: 54px;
 }
-
 .stone {
   position: absolute;
   top: 2px;
@@ -132,7 +137,18 @@ h1 {
   width: 42px;
   height: 42px;
   border-radius: 21px;
+}
+
+.stone[data-state="0"] {
+  display: none;
+}
+
+.stone[data-state="1"] {
   background-color: black;
+}
+
+.stone[data-state="2"] {
+  background-color: white;
 }
 
 #square-template {

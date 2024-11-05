@@ -47,9 +47,9 @@
           <img src="./images/settingButton.png" alt="設定" style="width: 50%;">
         </span>
       </div>
-
-      <div id="settingScene" style="display: none;">
-        <img src="./images/title.png" style="width: 70%;">
+      <div id="settingScene" style="display: none">
+        <h1>2⁷-4</h1>
+        <h1>クイズリバーシ</h1>
         <h2>設定</h2>
         <button id="back_titleSceneButton">タイトルに戻る</button>
         <button id="back_titleSceneButton1">難易度設定</button>
@@ -76,9 +76,11 @@
         <div id="stage" class="stage"></div>
 
         <!-- 各マスを描画するためのテンプレート -->
-        <div id="questionContainer">
-          <button id="questionButton">問題を表示</button>
+        <div id="square-template" class="square">
+          <div class='stone' ></div>
         </div>
+        <button id="pass">パスする</button>
+        <p>現在の手番は<span id="current-turn">黒</span>です</p>
         <script src="js/script.js"></script>
       </div>
     </body>
