@@ -1,33 +1,53 @@
-// サンプルデータと同様のJSON形式の問題セットを外部ファイルから読み込む
-function quizdasu(){
-fetch('questions.json')
-    .then(response => response.json())
-    .then(questionData => {
-        // ボタンにイベントリスナーを設定
-        document.getElementById('load-question').addEventListener('click', () => loadQuestion(questionData));
-    })
-    .catch(error => console.error('Error loading the question data:', error));
+var hantei=true;
+var lock=true;
+async function quizdasu() {
+    try {
+        if(lock){
+        const response = await fetch('JSON/questions.json');
+        const questionData = await response.json();
+        // loadQuestionがPromiseを返すようにします
+        return await loadQuestion(questionData);
+        }
+    } catch (error) {
+        console.error('Error loading the question data:', error);
+        return false;
+    }
 }
 
 // 問題をロードする関数
 function loadQuestion(questionData) {
-    const basho=appLayout.pixelToBoard(ex,ey);
-    // ランダムに問題を選択（単純な方法でランダムな問題を選ぶ）
-    const randomIndex = Math.floor(Math.random() * questionData.length);
-    const selectedQuestion = questionData[randomIndex];
+    return new Promise((resolve) => {
+        const randomIndex = Math.floor(Math.random() * questionData.length);
+        const selectedQuestion = questionData[randomIndex];
+        console.log(selectedQuestion.答え)
+        const questionArea = document.getElementById('question-area');
+        questionArea.innerHTML = '<h3>問題形式:' + selectedQuestion.問題形式 + '</h3>' +
+                                '<p>' + selectedQuestion.問題文 + '</p>';
+        const quizElement = document.getElementById('quiz');
+        quizElement.style.display = 'block'; // 要素を表示
 
-    // question-areaに問題と形式を表示
-    const questionArea = document.getElementById('question-area');
-    questionArea.innerHTML = '<h3>問題形式: ' + selectedQuestion.問題形式 + '</h3>' +
-                            '<p>' + selectedQuestion.問題文 + '</p>';
-    
-    // 格納した問題形式に基づき答え表示の方法を指定する
-    if (selectedQuestion.問題形式 === "択一(文章)") {
-        questionArea.innerHTML += '<button onclick="checkAnswer(\'' + selectedQuestion["答え"] + '\', \'多肢選択\')">答えを確認</button>';
-    } else if (selectedQuestion.問題形式 === "一問一答") {
-        questionArea.innerHTML += '<button onclick="checkAnswer(\'' + selectedQuestion["答え"] + '\', \'一問一答\')">答えを確認</button>';
-    }
+        if (selectedQuestion.問題形式 === "択一(文章)" || 
+            selectedQuestion.問題形式 === "一問一答" || 
+            selectedQuestion.問題形式 === "二択") {
+            questionArea.innerHTML += '<button id="answer">答えを確認</button>';
+        }
+
+        setTimeout(() => {
+            const answerButton = document.getElementById('answer');
+            if (answerButton) {
+                lock=false;
+                answerButton.addEventListener('click', function () {
+                    const result = checkAnswer(selectedQuestion["答え"], selectedQuestion.問題形式);
+                    resolve(result);  // 結果をPromiseとして返す
+                });
+            } else {
+                console.error('Button with id="answer" not found.');
+                resolve(false);  // エラーの場合は何らかのデフォルト値を返す
+            }
+        }, 0);
+    });
 }
+
 
 // 答えを確認する関数
 function checkAnswer(correctAnswer, format) {
@@ -35,22 +55,32 @@ function checkAnswer(correctAnswer, format) {
     if (format === "一問一答") {
         // 一問一答では文字の最初部分を確認
         userAnswer = userAnswer.trim();
-        if (userAnswer && userAnswer.charAt(0) === correctAnswer.charAt(0)) {
+        if (userAnswer && userAnswer === correctAnswer) {
             alert("正解です！");
-            return false;
+            hantei=true;
         } else {
             alert("残念、不正解です。");
-            return true;
+            hantei=false;
         }
-    } else if (format === "多肢選択") {
+    } else if (format === "二択" || format === "択一(文章)" ) {
+        console.log("二択");
+        userAnswer = userAnswer.trim();
         // 択一の確認
-        if (userAnswer === correctAnswer.charAt(0)) {
-            alert("正解です！");
-            return false;
+        if (userAnswer.charAt(0) === correctAnswer.charAt(0)) {
+            alert("正解です！")
+            hantei=true;
+            
         } else {
             alert("残念、不正解です。");
-            return true;
+            hantei=false;
         }
     }
     document.getElementById('kaitou').value = '';
+    const parent = document.getElementById('question-area');
+    while(parent.firstChild){
+    parent.removeChild(parent.firstChild);
+    }
+    console.log("START");
+    lock=true;
+    return(hantei)
 }

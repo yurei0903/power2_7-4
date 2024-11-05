@@ -21,7 +21,7 @@
     <script src="js/res-audio.js"></script>
     <script src="js/res-font.js"></script>
     <script src="js/res-image.js"></script>
-    <script src="js/rev-com.js"></script>
+    <!-- <script src="js/rev-com.js"></script> -->
     <script src="js/rev-core.js"></script>
     <script src="js/rev-data.js"></script>
     <script src="js/rev-info.js"></script>
@@ -33,6 +33,15 @@
   </head>
   <body oncontextmenu="return false;">
     <div id="reversi"></div>
-    <div id="quiz"></div>
+    <div id="quiz">
+        <div id="result-area"></div>
+    
+        <div id="question-area">
+            <!-- 問題表示エリア -->
+        </div>
+        <input type="text" id="kaitou" placeholder="ここに文字を入力" />
+    
+        <!-- JavaScriptファイルを読み込む -->
+    </div>
   </body>
 </html>

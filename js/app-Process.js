@@ -21,7 +21,7 @@ appProcess.put = async function(x, y) {
 appProcess.update = async function() {
     if (await this.tryEnd()) return;    // 終了
     if (await this.tryPass()) return;   // パス
-    if (await this.tryCom()) return;    // COM手番
+    // if (await this.tryCom()) return;    // COM手番
     appClick.isLock = false;    // 終了、パス、COM手番以外はロック解除
 };
 
@@ -47,7 +47,7 @@ appProcess.tryPass = async function() {
 appProcess.tryCom = async function() {
     const {types, player} = revCore.data;
     if (types[player] !== 'COM') return false;
-    const pos = revCom.get();       // COM指し手取得
+    // const pos = revCom.get();       // COM指し手取得
     await this.put(pos.x, pos.y);   // 石の配置
     return true;
 };

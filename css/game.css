@@ -21,3 +21,30 @@ html, body {
 
 /* 背景色 */
 body { background: #fff; }
+body {
+    display: flex;
+    justify-content: flex-end; /* 内容を右に寄せる */
+    align-items: flex-start;   /* 縦の配置を上にする */
+    margin: 0;                 /* 余白を無くす */
+    height: 100vh;             /* ビューポートの高さを100%にする */
+    position: relative;        /* 子要素の絶対位置を基準にするため */
+}
+.question-area{
+    white-space: pre-line; /* 改行を反映するためのスタイル */
+    
+}
+#quiz {
+    margin-right: 20px; /* 右側に余白を追加 */
+    position: relative; /* 基準位置を設定 */
+    z-index: 10;       /* 最前面に表示 */
+    width: 500px;
+    display:none;
+    background-color: rgba(255,255,255,0.6); /* 背景色を設定 (オプション) */
+    padding: 20px;     /* 内側の余白を設定 (オプション) */
+    border-radius: 5px; /* 角を丸くする (オプション) */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 (オプション) */
+    white-space: [pre-line];
+}
+
+
+
