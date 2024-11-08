@@ -1,18 +1,8 @@
-// function showPage(pageId) {
-//     // すべてのページを非表示にする
-//     var pages = document.querySelectorAll('.page');
-//     pages.forEach(function(page) {
-//         page.style.display = 'none';
-//     });
+const settingeria = document.getElementById('settingButton');
+settingeria.addEventListener("click", function btnClick() {
+    const settingArea = document.getElementById('settingScene');
+    const titleArea = document.getElementById('titleScene');
+    settingArea.style.display = 'block'; // 要素を表示
+    titleArea.style.display = 'none'; 
+});
 
-//     // 指定されたページを表示する
-//     var activePage = document.getElementById(pageId);
-//     if (activePage) {
-//         activePage.style.display = 'block';
-//     }
-// }
-
-// window.onload = function() {
-//     // 初回読み込み時に最初のページを表示
-//     showPage('page1');
-// }
